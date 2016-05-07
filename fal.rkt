@@ -5,13 +5,28 @@
 ; left to right and then top to bottom. E.g., the list '(o n x x x o o n n)
 ; corresponds to the following board:
 ;
-;  O |   | X 
+;  O |   | X
 ; ---|---|---
-;  X | X | O 
+;  X | X | O
 ; ---|---|---
 ;  O |   |
 
 #lang racket
+
+
+; ; ; ; ; ;
+; WINNING ;
+; ; ; ; ; ;
+
+(define winning-arrangements '((#t #t #t #f #f #f #f #f #f)
+                               (#f #f #f #t #t #t #f #f #f)
+                               (#f #f #f #f #f #f #t #t #t)
+                               (#t #f #f #t #f #f #t #f #f)
+                               (#f #t #f #f #t #f #f #t #f)
+                               (#f #f #t #f #f #t #f #f #t)
+                               (#t #f #f #f #t #f #f #f #t)
+                               (#f #f #t #f #t #f #t #f #f)))
+
 
 ; ; ; ; ; ;
 ; DISPLAY ;
@@ -21,7 +36,7 @@
   (lambda (b)
     (display "BOARD CODE: ") (display (board-to-code b)) (newline)
     (display-board-without-code b)))
-  
+
 (define display-board-without-code
   (lambda (b)
     (if (null? b)
