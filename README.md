@@ -1,5 +1,9 @@
-# f's and &lambda;'s
-## A Scheme implementation of Tic-Tac-Toe
+# __f's and &lambda;'s__
+## the state-free tic-tac-toe nobody asked for
 
-Ever wanted to play Tic-Tac-Toe without the convenience of a pesky persistent
-state? Have I got the pointless creation for you! 
+_f's and &lambda;'s_ is a Racket implementation of tic-tac-toe. Since
+everything it does is functionally pure (aside from printing to the terminal),
+it can't actually remember the board between turns. ~~I'm not sure why anyone
+would ever want to, but~~ here's how to play:
+
+`; TODO`
