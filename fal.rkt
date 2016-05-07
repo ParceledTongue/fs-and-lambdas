@@ -14,6 +14,36 @@
 #lang racket
 
 
+; ; ; ; ;
+; USERS ;
+; ; ; ; ;
+
+(define play-x
+  (lambda (p c)
+    (display-all (play-at-position 'x (code-to-board c) p position-names))))
+
+(define play-o
+  (lambda (p c)
+    (display-all (play-at-position 'o (code-to-board c) p position-names))))
+
+
+; ; ; ; ; ;
+; PLAYING ;
+; ; ; ; ; ;
+
+; the board resulting from playing symbol s on board b at position p
+; (position defined according to list pnames)
+(define play-at-position
+  (lambda (s b p pnames)
+    (cond
+      ((null? pnames) (error p "Invalid position name"))
+      ((string=? (car pnames) p) (if (eq? (car b) 'n)
+                                     (cons s (cdr b))
+                                     (error p "Position not free")))
+      (else (cons (car b) (play-at-position s (cdr b) p (cdr pnames)))))))
+
+(define position-names '("a1" "a2" "a3" "b1" "b2" "b3" "c1" "c2" "c3"))
+
 ; ; ; ; ; ;
 ; WINNING ;
 ; ; ; ; ; ;
