@@ -18,6 +18,11 @@
 
 (define display-board
   (lambda (b)
+    (display "BOARD CODE: ") (display (board-to-code b)) (newline)
+    (display-board-without-code b)))
+  
+(define display-board-without-code
+  (lambda (b)
     (if (null? b)
         (newline)
         ; if there is still board info to print:
@@ -27,12 +32,12 @@
               ; if this is the last symbol of the first or second row, display
               ; the horizontal break in the board
               (begin (newline) (display "---|---|---") (newline)
-                     (display-board (cdr b)))
+                     (display-board-without-code (cdr b)))
               ; otherwise, display the horizontal break (as long as we are not
               ; on the 9th grid space)
               (if (eq? (length b) 1)
-                  (display-board (cdr b))
-                  (begin (display " |") (display-board (cdr b)))))))))
+                  (display-board-without-code (cdr b))
+                  (begin (display " |") (display-board-without-code (cdr b)))))))))
 
 (define symbol-to-string
   (lambda (s)
