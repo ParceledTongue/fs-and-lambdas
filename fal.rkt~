@@ -11,13 +11,6 @@
 ; ---|---|---
 ;  O |   |
 
-
-
-
-; ; ; ; ; ;
-; DISPLAY ;
-; ; ; ; ; ;
-
 (define display-board
   (lambda (b)
     (if (null? b)
