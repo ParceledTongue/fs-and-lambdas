@@ -18,6 +18,39 @@
 ; WINNING ;
 ; ; ; ; ; ;
 
+; whether the player using symbol s has won on board b
+(define has-won?
+  (lambda (s b)
+    (some-arrangement-matches? s b winning-arrangements)))
+
+; whether symbol s on board b matches some arrangement in list l
+(define some-arrangement-matches?
+  (lambda (s b l)
+    (if (null? l)
+        #f
+        (or (arrangement-matches? s b (car l)) (some-arrangement-matches? s b (cdr l))))))
+
+; whether symbol s on board b matches arrangement a
+(define arrangement-matches?
+  (lambda (s b a)
+    (cond
+      ; finished checking the arrangement:
+      ((null? a) #t)
+      ; the state of the current square is not relevant to the arrangement:
+      ((not (car a)) (arrangement-matches? s (cdr b) (cdr a)))
+      ; the square state is relevant and the symbol matches:
+      ((eq? (car b) s) (arrangement-matches? s (cdr b) (cdr a)))
+      ; the square state is relevant and the symbol does not match:
+      (else #f))))
+
+; check if the board is full (for draws)
+(define board-full?
+  (lambda (b)
+    (cond
+      ((null? b) #t)
+      ((eq? (car b) 'n) #f)
+      (else (board-full? (cdr b))))))
+
 (define winning-arrangements '((#t #t #t #f #f #f #f #f #f)
                                (#f #f #f #t #t #t #f #f #f)
                                (#f #f #f #f #f #f #t #t #t)
@@ -32,15 +65,16 @@
 ; DISPLAY ;
 ; ; ; ; ; ;
 
-(define display-board
+(define display-all
   (lambda (b)
     (display "BOARD CODE: ") (display (board-to-code b)) (newline)
-    (display-board-without-code b)))
+    (display-board b) (newline)
+    (display-winner b)))
 
-(define display-board-without-code
+(define display-board
   (lambda (b)
     (if (null? b)
-        (newline)
+        (display "")
         ; if there is still board info to print:
         (begin
           (display " ") (display (symbol-to-string (car b)))
@@ -48,12 +82,27 @@
               ; if this is the last symbol of the first or second row, display
               ; the horizontal break in the board
               (begin (newline) (display "---|---|---") (newline)
-                     (display-board-without-code (cdr b)))
+                     (display-board (cdr b)))
               ; otherwise, display the horizontal break (as long as we are not
               ; on the 9th grid space)
               (if (eq? (length b) 1)
-                  (display-board-without-code (cdr b))
-                  (begin (display " |") (display-board-without-code (cdr b)))))))))
+                  (display-board (cdr b))
+                  (begin (display " |") (display-board (cdr b)))))))))
+
+(define display-winner
+  (lambda (b)
+    (cond
+      ((has-won? 'x b) (begin (display "*~*~*~*~*~*~*") (newline)
+                              (display "~* ") (display (symbol-to-string 'x))
+                              (display " WINS! *~") (newline)
+                              (display "*~*~*~*~*~*~*")))
+      ((has-won? 'o b) (begin (display "*~*~*~*~*~*~*") (newline)
+                              (display "~* ") (display (symbol-to-string 'o))
+                              (display " WINS! *~") (newline)
+                              (display "*~*~*~*~*~*~*")))
+      ((board-full? b) (begin (display "================") (newline)
+                              (display "== CAT'S GAME ==") (newline)
+                              (display "================"))))))
 
 (define symbol-to-string
   (lambda (s)
