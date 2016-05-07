@@ -1,5 +1,5 @@
 ; F'S AND LAMBDAS
-; a Scheme implementation of Tic-Tac-Toe
+; a Racket implementation of Tic-Tac-Toe
 
 ; A board is a list of nine characters, which are the contents of the board from
 ; left to right and then top to bottom. E.g., the list '(o n x x x o o n n)
