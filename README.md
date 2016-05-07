@@ -1,4 +1,4 @@
-# &lambda;'s and f's
+# f's and &lambda;'s
 ## A Scheme implementation of Tic-Tac-Toe
 
 Ever wanted to play Tic-Tac-Toe without the convenience of a pesky user
