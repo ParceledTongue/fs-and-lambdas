@@ -36,10 +36,36 @@
                   (display-board (cdr b))
                   (begin (display " |") (display-board (cdr b)))))))))
 
-(define string-rep
+(define symbol-string-rep
   (lambda (s)
     (cond
       ((eq? s 'o) "O")
       ((eq? s 'x) "X")
       ((eq? s 'n) " ")
       (else (error s "Invalid board symbol")))))
+
+; ; ; ; ; ; ; ;
+; BOARD CODES ;
+; ; ; ; ; ; ; ;
+
+(define board-to-code
+  (lambda (b)
+    (if (null? b)
+        ""
+        (string-append (list-ref alphabet (+ (* 9 (symbol-number-rep (car b)))
+                                             (* 3 (symbol-number-rep (cadr b)))
+                                             (symbol-number-rep (caddr b))))
+                       (board-to-code (cdddr b))))))
+
+(define symbol-number-rep
+  (lambda (s)
+    (cond
+      ((eq? s 'o) 0)
+      ((eq? s 'x) 1)
+      ((eq? s 'n) 2)
+      (else (error s "Invalid board symbol")))))
+
+(define alphabet '("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o"
+                       "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z" "0"))
+; (if only the Latin alphabet had 27 letters instead of only 26,
+; we wouldn't need that silly 0)
