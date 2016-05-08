@@ -134,7 +134,7 @@
                               (display "*~*~*~*~*~*~*") (newline)))
       ((board-full? b) (begin (display "================") (newline)
                               (display "== CAT'S GAME ==") (newline)
-                              (display "================") (newline)))))
+                              (display "================") (newline))))))
 
 (define symbol-to-string
   (lambda (s)
