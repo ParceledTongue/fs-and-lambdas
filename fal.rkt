@@ -13,6 +13,8 @@
 
 #lang racket
 
+(provide play-x)
+(provide play-o)
 
 ; ; ; ; ;
 ; USERS ;
@@ -125,14 +127,14 @@
       ((has-won? 'x b) (begin (display "*~*~*~*~*~*~*") (newline)
                               (display "~* ") (display (symbol-to-string 'x))
                               (display " WINS! *~") (newline)
-                              (display "*~*~*~*~*~*~*")))
+                              (display "*~*~*~*~*~*~*") (newline)))
       ((has-won? 'o b) (begin (display "*~*~*~*~*~*~*") (newline)
                               (display "~* ") (display (symbol-to-string 'o))
                               (display " WINS! *~") (newline)
-                              (display "*~*~*~*~*~*~*")))
+                              (display "*~*~*~*~*~*~*") (newline)))
       ((board-full? b) (begin (display "================") (newline)
                               (display "== CAT'S GAME ==") (newline)
-                              (display "================"))))))
+                              (display "================") (newline)))))
 
 (define symbol-to-string
   (lambda (s)
