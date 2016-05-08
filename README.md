@@ -6,7 +6,7 @@ it can't actually remember the board between turns. Look below for instructions
 on how to play ~~(although I don't know why anyone would want to)~~.
 
 ## Playing
-- Start up Racket by running `racket` in the project directory
+- Start up [Racket](https://racket-lang.org/) by running `racket` in the project directory
 - Import the player-accessible functions with `(require "fal.rkt")`
 - Take turns calling the functions `play-x` and `play-o` until the game is over
 
